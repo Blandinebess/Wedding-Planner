@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSVP</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid">
+<a class="navbar-brand" href="#">Wedding Planner</a>
+<div class="collapse navbar-collapse">
+<ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="rsvp.html">RSVP</a></li>
+<li class="nav-item"><a class="nav-link" href="info.html">Info</a></li>
+</ul>
+</div>
+</div>
+</nav>
+</header>
+
+<main class="container my-4">
+<h2>RSVP Form</h2>
+<form id="rsvpForm" novalidate>
+<div class="mb-3">
+<label for="name" class="form-label">Full Name</label>
+<input type="text" class="form-control" id="name" required>
+<div class="invalid-feedback">Please enter your name.</div>
+</div>
+<div class="mb-3">
+<label for="email" class="form-label">Email address</label>
+<input type="email" class="form-control" id="email" required>
+<div class="invalid-feedback">Enter a valid email.</div>
+</div>
+<div class="mb-3">
+<label for="meal">Meal Preference</label>
+<select class="form-select" id="meal" required>
+<option value="">Choose...</option>
+<option value="chicken">Chicken</option>
+<option value="vegetarian">Vegetarian</option>
+<option value="fish">Fish</option>
+</select>
+<div class="invalid-feedback">Please choose a meal.</div>
+</div>
+<div class="mb-3">
+<label>Attendance</label><br>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="attendance" id="attendYes" value="yes" required>
+<label class="form-check-label" for="attendYes">Yes</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="attendance" id="attendNo" value="no">
+<label class="form-check-label" for="attendNo">No</label>
+</div>
+<div class="invalid-feedback d-block">Please choose your attendance.</div>
+</div>
+<div class="mb-3 form-check">
+<input type="checkbox" class="form-check-input" id="vip">
+<label class="form-check-label" for="vip">I am a VIP guest</label>
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div id="submissionResult" class="mt-4"></div>
+</main>
+<h3 class="mt-5">Guest List</h3>
+<table class="table table-striped mt-3" id="guestTable">
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Meal</th>
+<th>Attendance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<footer class="bg-light text-center p-3">© 2025 Wedding Planner</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const form = document.getElementById('rsvpForm');
+const resultDiv = document.getElementById('submissionResult');
+
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+if (!form.checkValidity()) {
+form.classList.add('was-validated');
+return;
+}
+
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const meal = document.getElementById('meal').value;
+const attendance = document.querySelector('input[name="attendance"]:checked').value;
+const vip = document.getElementById('vip').checked ? 'VIP' : 'Guest';
+
+resultDiv.innerHTML = `
+<div class="card">
+<div class="card-body">
+<h5 class="card-title">${name} <span class="badge bg-success">${vip}</span></h5>
+<p class="card-text">Email: ${email}<br>Meal: ${meal}<br>Attending: ${attendance}</p>
+<div class="alert alert-success mt-2" role="alert">RSVP submitted successfully!</div>
+</div>
+</div>
+`;
+});
+const guestTable = document.querySelector('#guestTable tbody');
+
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+if (!form.checkValidity()) {
+form.classList.add('was-validated');
+return;
+}
+
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const meal = document.getElementById('meal').value;
+const attendance = document.querySelector('input[name="attendance"]:checked').value;
+const vip = document.getElementById('vip').checked ? 'VIP' : 'Guest';
+
+// Add row to table
+const newRow = document.createElement('tr');
+newRow.innerHTML = `
+<td>${name}</td>
+<td>${email}</td>
+<td>${meal}</td>
+<td>${attendance}</td>
+<td><span class="badge bg-${vip === 'VIP' ? 'warning' : 'secondary'}">${vip}</span></td>
+`;
+guestTable.appendChild(newRow);
+resultDiv.innerHTML = `
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">${name} <span class="badge bg-success">${vip}</span><h5>
+            <p class="card-text">RSVP cofirmes! See you soon!</p>
+              <div class="alert alert-success mt-2">Your RSVP has been added to the guest list.</div>
+                </div>
+                </div>
+                `;
+                form.restet();
+                form.classList.remove(was-validated);
+            });
+</script>
+
+
+</body>
+</html>

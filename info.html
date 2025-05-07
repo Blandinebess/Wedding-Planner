@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedding Info</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid">
+<a class="navbar-brand" href="#">Wedding Planner</a>
+<div class="collapse navbar-collapse">
+<ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="rsvp.html">RSVP</a></li>
+<li class="nav-item"><a class="nav-link" href="info.html">Info</a></li>
+</ul>
+</div>
+</div>
+</nav>
+</header>
+
+<main class="container my-4">
+<h2>Wedding Info & API Fun</h2>
+<button class="btn btn-secondary mb-3" onclick="fetchQuote()">Get a Love Quote</button>
+<div id="quoteContainer" class="mb-4"></div>
+
+<h3>Example Wedding Schedule:</h3>
+<pre>
+Ceremony: 4:00 PM
+Reception: 6:00 PM
+Dinner: 7:00 PM
+Dance: 8:30 PM
+</pre>
+</main>
+<h4>Check Wedding Day Weather</h4>
+<input type="text" id="cityInput" class="form-control w-50 d-inline-block" placeholder="Enter city">
+<button onclick="getWeather()" class="btn btn-primary ms-2">Check Weather</button>
+<div id="weatherResult" class="mt-3"></div>
+
+<footer class="bg-light text-center p-3">© 2025 Wedding Planner</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+async function fetchQuote() {
+const container = document.getElementById('quoteContainer');
+container.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
+try {
+const response = await axios.get('https://api.quotable.io/random?tags=love');
+container.innerHTML = `
+<div class="card">
+<div class="card-body">
+<blockquote class="blockquote mb-0">
+<p>"${response.data.content}"</p>
+<footer class="blockquote-footer">${response.data.author}</footer>
+</blockquote>
+</div>
+</div>
+`;
+} catch (error) {
+container.innerHTML = `<div class="alert alert-danger">Failed to fetch quote.</div>`;
+}
+}
+async function getWeather() {
+const city = document.getElementById('cityInput').value;
+const result = document.getElementById('weatherResult');
+result.innerHTML = '<div class="spinner-border" role="status"></div>';
+
+try {
+const apiKey = 'YOUR_API_KEY'; // replace with your OpenWeather API key
+const response = await axios.get(
+`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+);
+const data = response.data;
+
+result.innerHTML = `
+<div class="card">
+<div class="card-body">
+<h5 class="card-title">Weather in ${data.name}</h5>
+<p class="card-text">
+${data.weather[0].description} <br>
+Temperature: ${data.main.temp}°C <br>
+Humidity: ${data.main.humidity}%
+</p>
+</div>
+</div>
+`;
+} catch (error) {
+result.innerHTML = `<div class="alert alert-danger">Unable to fetch weather. Try another city.</div>`;
+}
+}
+</script>
+
+</script>
+
+
+</body>
+</html>
