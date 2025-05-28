@@ -1,39 +1,44 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wedding Planner</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blandine & Fouad Wedding</title>
+<link rel="stylesheet" href="css/style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
 </head>
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<div class="container-fluid">
-<a class="navbar-brand" href="#">Wedding Planner</a>
-<div class="collapse navbar-collapse">
-<ul class="navbar-nav">
-<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="rsvp.html">RSVP</a></li>
-<li class="nav-item"><a class="nav-link" href="info.html">Info</a></li>
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="story.html">Our Story</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="budget.html">Budget</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="rsvp.html">RSVP</a></li>
+<li><a href="map.html">Map</a></li>
+<li><a href="countdown.html">Countdown</a></li>
+<li><a href="registry.html">Gifts</a></li>
 </ul>
-</div>
-</div>
 </nav>
-</header>
 
-<main class="container my-4">
-<h1 class="mb-4">Welcome to Our Wedding!</h1>
-<p>Please explore the site to RSVP and get more details about our special day.</p>
+<section class="card-container">
+<div class="card">
+<img src="images/your-photo.jpg" alt="Couple Photo" class="couple-photo" />
+<h1 class="invite-header">You're Invited</h1>
+<p class="invite-text">Join us for the wedding of</p>
+<h2 class="couple-names">Blandine</h2>
+<span class="and">&</span>
+<h2 class="couple-names">Fouad</h2>
+<p class="wedding-date">Saturday, June 20th, 2026<br>2:00 PM</p>
+<p class="venue">Mestfield Gardens<br>650 Glover St, Statesville, NC</p>
+<p class="note">Reception to follow</p>
+</div>
+</section>
 
-<!-- Image Map -->
-<img src="wedding-map.jpg" alt="Wedding Map" usemap="#weddingmap" class="img-fluid">
-<map name="weddingmap">
-<area shape="rect" coords="0,0,200,200" href="rsvp.html" alt="RSVP">
-<area shape="rect" coords="201,0,400,200" href="info.html" alt="Info">
-</map>
-</main>
-
-<footer class="bg-light text-center p-3">© 2025 Wedding Planner</footer>
+<footer>
+<p>&copy; 2025 Blandine & Fouad</p>
+</footer>
 </body>
 </html>
